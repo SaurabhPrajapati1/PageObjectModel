@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="POM Suite" verbose="1" parallel="false" thread-count="1">
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+    </listeners>
+
+    <test name="Registration Tests">
+        <classes>
+            <class name="testcases.RegistrationFormTest"/>
+        </classes>
+    </test>
+</suite>
+

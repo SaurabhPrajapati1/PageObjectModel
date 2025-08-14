@@ -1,0 +1,58 @@
+name: CI - Workflow with TestNG + Maven + Slack Notifications
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Repo clone
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Java 17 install
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # Step 3: Maven test run (auto fail on test failure)
+      - name: Run Tests with Maven
+        run: mvn clean test
+
+      # Step 4: Upload Reports & Screenshots
+      - name: Upload Artifacts (Extent Report & Screenshots)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-artifacts
+          path: |
+            reports/**
+            screenshots/**
+
+      # Step 5: Slack Notification (based on job result)
+      - name: Slack Notification
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            STATUS="SUCCESS"
+            ICON=":white_check_mark:"
+          else
+            STATUS="FAILURE"
+            ICON=":x:"
+          fi
+
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          MESSAGE="$ICON CI $STATUS - [View Run]($RUN_URL)"
+
+          curl -X POST -H 'Content-type: application/json' \
+               --data "{\"text\":\"$MESSAGE\"}" \
+               "$SLACK_WEBHOOK_URL"
