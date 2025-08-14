@@ -25,7 +25,7 @@ public class RegistrationFormTest {
 	public void setUp(ITestContext context) {
 		// Set up Chrome in headless mode
 		ChromeOptions options = new ChromeOptions();
-		//options.addArguments("--headless"); // Run in headless mode
+		options.addArguments("--headless"); // Run in headless mode
 		options.addArguments("--disable-gpu"); // Recommended for Windows
 		options.addArguments("--window-size=1920,1080"); // Emulate full screen
 		options.addArguments("--remote-allow-origins=*"); // Prevent CORS issues (ChromeDriver 111+)
