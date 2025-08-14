@@ -34,7 +34,7 @@ public class ExtentReportManager {
                     extent = new ExtentReports();
                     extent.attachReporter(spark);
 
-                    String engineer = System.getProperty("qa.engineer", "Raj Kumar");
+                    String engineer = System.getProperty("qa.engineer", "Saurabh Prajapati");
                     String env = System.getProperty("env", "QA");
                     extent.setSystemInfo("Automation QA Engineer", engineer);
                     extent.setSystemInfo("Environment", env);
