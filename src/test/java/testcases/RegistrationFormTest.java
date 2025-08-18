@@ -25,9 +25,9 @@ public class RegistrationFormTest {
 	public void setUp(ITestContext context) {
 		// Set up Chrome in headless mode
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless"); // Run in headless mode
+		//options.addArguments("--headless"); // Run in headless mode
 		options.addArguments("--disable-gpu"); // Recommended for Windows
-		options.addArguments("--window-size=1920,1080"); // Emulate full screen
+		options.addArguments("--window-size=1366,768"); // Emulate full screen
 		options.addArguments("--remote-allow-origins=*"); // Prevent CORS issues (ChromeDriver 111+)
 
 		driver = new ChromeDriver(options);
@@ -46,22 +46,22 @@ public class RegistrationFormTest {
 	@Test
 	public void navigateToRegistrationFormTest() {
 		homePage.navigateToRegistrationForm();
-		registrationPage.enterFirstName("Raj");
-		registrationPage.enterLastName("Kumar");
+		registrationPage.enterFirstName("Saurabh");
+		registrationPage.enterLastName("Prajapati");
 		registrationPage.clickMaleRadioBtn();
 		registrationPage.checkSeleniumWebDriverCheckBox();
 		registrationPage.unCheckDevOpsCheckBox();
 		registrationPage.enterStreetAddress("123 Main St");
 		registrationPage.enterAptSuite("Apt 456");
-		registrationPage.enterCity("Noida");
+		registrationPage.enterCity("Ghaziabad");
 		registrationPage.enterState("Uttar Pradesh");
-		registrationPage.enterPostalCode("201301");
+		registrationPage.enterPostalCode("201302");
 		registrationPage.selectCountry("India");
-		registrationPage.enterEmail("raj.kumar@gmail.com");
+		registrationPage.enterEmail("Saurabh.abc@gmail.com");
 		registrationPage.enterDateOfDemo("07/03/2023");
 		registrationPage.selectConvenientTimeHH("10");
 		registrationPage.selectConvenientTimeMM("30");
-		registrationPage.enterPhoneNumber("9876543210");
+		registrationPage.enterPhoneNumber("9878654321");
 		registrationPage.enterYourQuery("What is the course fees?");
 		registrationPage.enterVerificationNumber();
 		registrationPage.clickSubmitButton();
